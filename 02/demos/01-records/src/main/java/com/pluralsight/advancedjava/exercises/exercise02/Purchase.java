@@ -19,4 +19,17 @@ import java.time.LocalDateTime;
  *       Run the included unit test {@link Exercise02Test} to check if you have done this correctly.
  */
 public record Purchase(long productId, int quantity, BigDecimal price, LocalDateTime dateTime) {
+
+    public Purchase {
+        if (quantity <= 0) {
+            throw new IllegalArgumentException("Quantity must be greater than zero");
+        }
+        if (price.compareTo(BigDecimal.ZERO) <= 0) {
+            throw new IllegalArgumentException("Price must be greater than zero");
+        }
+        if (dateTime.isAfter(LocalDateTime.now())) {
+            throw new IllegalArgumentException("Date and time must be in the past");
+        }
+    }
+
 }

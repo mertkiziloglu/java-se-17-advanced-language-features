@@ -15,4 +15,5 @@ import java.util.Set;
  *       Run the included unit test {@link Exercise03Test} to check if you have done this correctly.
  */
 public record Product(long id, String name, Set<String> keywords) {
+    //Add a compact constructor to the record that does what is necessary. Keep in mind that a java.util.Set might be mutable.
 }
