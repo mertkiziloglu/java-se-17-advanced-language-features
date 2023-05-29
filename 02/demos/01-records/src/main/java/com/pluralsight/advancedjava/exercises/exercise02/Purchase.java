@@ -8,6 +8,8 @@ package com.pluralsight.advancedjava.exercises.exercise02;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import static java.time.LocalDateTime.MAX;
+
 /**
  * Exercise 2: This record represents a purchase of a certain quantity of a product at a certain price, and a certain date and time.
  * <p>
@@ -24,10 +26,13 @@ public record Purchase(long productId, int quantity, BigDecimal price, LocalDate
         if (quantity <= 0) {
             throw new IllegalArgumentException("Quantity must be greater than zero");
         }
-        if (price.compareTo(BigDecimal.ZERO) <= 0) {
+        if (price.compareTo(BigDecimal.ZERO) > 0) {
             throw new IllegalArgumentException("Price must be greater than zero");
         }
         if (dateTime.isAfter(LocalDateTime.now())) {
+            throw new IllegalArgumentException("Date and time must be in the past");
+        }
+        if (dateTime.isAfter(MAX)) {
             throw new IllegalArgumentException("Date and time must be in the past");
         }
     }
