@@ -27,12 +27,19 @@ public class TransactionService {
         // Note that this is available in Java 17 only as a preview feature; you need to enable the use of preview features
         // to be able to use this. More information: https://openjdk.java.net/jeps/406
 
-        for (Transaction transaction : transactions) {
+      /*  for (Transaction transaction : transactions) {
             if (transaction instanceof Purchase purchase) {
                 netAmount = netAmount.add(purchase.amount());
             } else if (transaction instanceof Refund refund) {
                 netAmount = netAmount.subtract(refund.amount());
             }
+        }*/
+
+        for (Transaction transaction : transactions) {
+            netAmount = switch (transaction) {
+                case Purchase purchase -> netAmount.add(purchase.amount());
+                case Refund refund -> netAmount.subtract(refund.amount());
+            };
         }
 
         return netAmount;
